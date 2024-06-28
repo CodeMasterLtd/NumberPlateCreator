@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Plate Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/charles-wright" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="img/npc.png" type="image/png"><!-- nice try -->
+    
+<script>
+    const versionNumber = '1.0.0.0';
+    const loadTime = 4000;
+    const updateloadTime = 10000;
+    const ping = 1000;
+    const imgType = 'png';
+</script>
+<style>
+    @import url('https://fonts.cdnfonts.com/css/charles-wright');
+        .logo {
+            position: absolute;
+            top: 10px; 
+            left: 10px; 
+            border-radius: 20px;
+            box-shadow: #3a3a3a 0 0 5px;
+            animation-delay: 1s;
+            width: 100px; 
+            height: auto; 
+            z-index: 999; 
+        }
+
+        h2 {
+            margin-top: -5px;
+            background: #808080;
+            text-align: center;
+            font-size: 45px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            opacity: 0;
+            animation: fadeIn 4s forwards;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            transition: transform 0.3s ease-in-out; 
+        }
+        p {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            font-size: 14px;
+            color: #000;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            max-width: 970px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #8b8b8bbd;
+            border-radius: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        @keyframes boxShadowAnimation {
+            50% {
+                box-shadow: #9abaff 0 0 15px;
+            }
+            100% {
+                box-shadow: #9abaff 0 0 30px;
+            }
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 20px;
+            box-shadow: #9abaff 0px 0px 30px;
+            animation: boxShadowAnimation 2s infinite;
+            pointer-events: none;
+        }
+
+        .plate {
+            font-family: 'Charles Wright', sans-serif;
+            position: relative;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            color: #000;
+            font-size: 195px;
+            line-height: 235px;
+        }
+        .front {
+            /*background: linear-gradient(180deg, #ffffff, #c7c7c7);*/
+            background-color: #FFFFFF;
+        }
+
+        .back  {
+           /* background: linear-gradient(180deg, #FFA500, #ca8401);*/
+            background-color: #FFA500;
+        }
+        input[type="text"] {
+            width: 290px;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #adadad;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: -15px;
+        }
+        .button {
+            border: 2px solid #000;
+            color: rgb(255, 255, 255);
+            padding: 10px 15px;
+            display: block; 
+            font-size: 16px;
+            margin: 5px auto; 
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .button1col:hover {
+            box-shadow: #FFA500 0px 0px 10px;
+        }
+        .button2col:hover {
+            box-shadow: #FFFFFF 0px 0px 10px;
+        }
+        .button3col:hover {
+            box-shadow: #000000 0px 0px 10px;
+        }
+        .button2:hover {
+            color: #a1a1a1;
+        }
+        .button1 {
+            border: 2px solid #000;
+            color: #000;
+            padding: 0px 10px;
+            display: inline-block; 
+            font-size: 16px;
+            margin: 1px; 
+            cursor: pointer;
+            border-radius: 50px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .button2 {
+            border: 0px solid #e2e2e2ea;
+            background-color: #00000000;
+            font-weight: bold;
+            color: #7a0000;
+            padding: 10px 15px;
+            display: block; 
+            font-size: 12px;
+            margin: 5px auto; 
+            cursor: pointer;
+            border-radius: 50px;
+            animation: pulse 2s infinite;
+        }
+        .button1col {
+            background: linear-gradient(180deg, #FFA500, #ca8401);
+        }
+        .button2col {
+            background: linear-gradient(180deg, #ffffff, #c7c7c7);
+        }
+        .button3col {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+        .fslogan {
+            font-family: Arial, Helvetica, sans-serif;
+            position: absolute; 
+            bottom: 8px;
+            left: 50%; 
+            transform: translateX(-50%); 
+            font-size: 15px; 
+            color: #000;
+            font-weight: bold;
+            line-height: 100%;
+            padding-right:20px;
+            padding-left: 20px;
+            background: #FFFFFF;
+            z-index: 1;
+        }
+        .bslogan {
+            font-family: Arial, Helvetica, sans-serif;
+            position: absolute; 
+            bottom: 8px;
+            left: 50%; 
+            transform: translateX(-50%); 
+            font-size: 15px; 
+            color: #000;
+            font-weight: bold;
+            line-height: 100%;
+            padding-right:20px;
+            padding-left: 20px;
+            background: #FFA500;
+            z-index: 1;       
+        }
+        .bottom-right {
+            font-family: Arial, Helvetica, sans-serif;
+            position: absolute;
+            font-weight: bold;
+            bottom: 17px;
+            right: 25px; 
+            font-size: 6px; 
+            color: #000;
+            line-height: 100%;
+        }
+        .centered {
+            text-align: center;
+        }
+        .footer {
+            margin-top: -18px;
+            text-align: center; 
+            font-size: 13px;
+            color: #000000;
+        }
+        .copyright2 {
+            margin-top: 100px;
+            text-align: center; 
+            font-size: 13px;
+            color: #313131;
+            text-shadow: #0051ff 0px 0px 1.5px;
+        }
+        .footer p {
+            text-align: center; 
+            font-size: 13px;
+            color: #000000;
+        }
+        .discord-link {
+            margin-top: -18px;
+            display: absolute;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discord-link img {
+            margin-top: -10px;
+            width: 40px; 
+            height: 35px;
+            margin-left: 5px; 
+            box-shadow: #0051ff 0px 0px 5px;
+            border-radius: 50px;
+            animation: pulse 3s infinite backwards;
+        }
+        .version {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            position: absolute;
+            top: 5px; 
+            right: 10px; 
+            font-size: 10.5px; 
+            color: #000;
+            font-weight: 500;
+        }
+        .changelog {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            position: absolute;
+            top: 25px;
+            right: 10px; 
+            font-size: 10.5px; 
+            font-weight: 500;
+        }
+        .electric-box {
+            display: none; 
+            position: absolute;
+            top: 12px;
+            bottom: 12px;
+            width: 85px;
+            height: auto;
+            left: 12px;
+            right: 12px;
+            border-radius: 10px;
+            translate: 0;
+            box-shadow: 1px 0 3px #006611;
+
+        }
+        .border {
+            display: none;
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 5px;
+            right: 5px;
+            border-width: 5px;
+            border-style: solid; 
+            border-color: #000; 
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        label {
+            color: #000;
+            font-size: smaller;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            display: inline-block;
+            width: auto;
+            margin-right: 10px;
+            margin-left: 15px;
+        }
+        .label-inline {
+            display: inline-block;
+            width: auto; 
+            margin-right: 1px;
+            text-align: center;
+        }
+        #plateInput {
+            text-transform: uppercase;
+            font-family: 'Charles Wright', sans-serif;
+        }
+        footer .social-media a p {
+            color: #ffffffa2;
+            margin: 0 5px;
+            font-size: 15px;
+            text-decoration: none;
+            border-radius: 50px;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        footer .social-media a:hover {
+            color: #21a2f8;
+            text-shadow: 0 0 5px #be57fa;
+        }
+        .foot {
+            text-align: center;
+            font-size: 18px;
+            margin: 5px 0px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 0.25;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0; 
+            }
+            to {
+                opacity: 1; 
+            }
+        }
+
+        @keyframes colorIn {
+            80%, 100% {
+                color: #00f800;
+            }
+            40%, 50%, 80% {
+                color: #ff6600;
+            }
+            0%, 40% {
+                color: #ff0000; 
+            }
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes animate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .icon {
+            font-size: 80px;
+            color: #FFFFFF;
+            position: absolute;
+            top: 70px; 
+            transform: translateX(-50%);
+            text-shadow: 0 0 2px #8a8989; 
+            vertical-align: middle;
+        }
+        .icon1 {
+            text-align: center; 
+            font-size: 80px;
+            color: #FFA500;
+            position: absolute;
+            top: 70px; 
+            transform: translateX(-50%); 
+            text-shadow: 0 0 2px #704900;
+            vertical-align: middle;
+        }
+
+        .icon2 {
+            text-align: center; 
+            font-size: 60px;
+            color: #FFA500;
+            position: absolute;
+            left: 60px;
+            top: -10px;
+            transform: translateX(-70%); 
+            text-shadow: 0 0 2px #704900;
+            vertical-align: middle;
+        }
+
+        .icon3 {
+            text-align: center; 
+            font-size: 60px;
+            color: #FFFFFF;
+            position: absolute;
+            left: 60px;
+            top: -10px;
+            transform: translateX(-70%); 
+            text-shadow: 0 0 2px #8a8989;
+            vertical-align: middle;
+        }
+
+        .icon5 {
+            text-align: center;
+            font-size: 60px;
+            color: #FFFFFF;
+            position: absolute;
+            top: 70px; 
+            transform: translateX(-50%);
+            text-shadow: 0 0 2px #8a8989; 
+            vertical-align: middle;
+        }
+        .icon4 {
+            text-align: center; 
+            font-size: 60px;
+            color: #FFA500;
+            position: absolute;
+            top: 70px; 
+            transform: translateX(-50%); 
+            text-shadow: 0 0 2px #704900;
+            vertical-align: middle;
+        }
+
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+            justify-content: center;
+            background-color: #000;
+        }
+
+</style>
+</head>
+<body>
+    <div class="video-overlay">
+        <iframe id="myVideo"></iframe>
+            </div>
+    <div class="container">
+        <img src="img/codemaster.jpg" alt="Your Logo" class="logo">
+        <h2>NUMBER PLATE CREATOR</h2>
+        <p>Empower yourself to craft and preserve custom number plates, seamlessly integrating them into your personalized vehicle designs for Grand Theft Auto V or any other creative project you have in mind.</p>
+        <input type="text" id="plateInput" placeholder="Enter number plate eg:(AB12 CDE)" />
+        <input type="text" id="sloganInput" placeholder="Enter plate slogan eg:(Code Master)" />
+        <input type="text" id="BSDInput" placeholder="Enter plate BSD eg:(BSAU145d)" />
+        <br></br>
+        <label class="label-inline" for="plateStyleSelect">Style:</label>
+        <select id="plateStyleSelect" onchange="changePlateStyle()">
+            <option value="standard">Standard</option>
+            <option value="old">Old</option>
+        </select>
+        <label class="label-inline" for="styleSelect">Badge:</label>
+        <select id="styleSelect" onchange="toggleBoxStyle()">
+            <option value="none">None</option>
+            <option value="electric">EV</option>
+            <option value="electricIcon">EV Power Icon</option>
+            <option value="electricIcon1">EV Plug Icon</option>
+            <option value="electricText">EV Text</option>
+            <!--<option value="UK">United Kingdom</option>-->
+        </select>
+        <label class="label-inline" for="stampSelect">BSD:</label>
+        <select  id="stampSelect" onchange="toggleStamp()">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <label class="label-inline" for="sloganSelect">Slogan:</label>
+        <select id="sloganSelect" onchange="toggleSlogan()">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <label class="label-inline" for="borderEffect">Border:</label>
+        <select id="borderEffect" onchange="toggleBorderEffect()">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+        <div id="borderOptions" style="display:none;">
+            <br></br>
+            <label for="borderColor">Border Color:</label>
+            <input type="color" id="borderColor" onchange="changeBorderColor()">
+            <br></br>
+        </div>
+        <label class="label-inline" for="plateTintSelect">Tinted:</label>
+        <select id="plateTintSelect" onchange="TintPlate()">
+            <option value="standard" disabled>No</option>
+            <option value="tinted" disabled>Yes</option>
+        </select>
+        
+        <label class="label-inline" for="fourDEffect">4D:</label>
+        <select id="fourDEffect" onchange="toggle4DEffect()">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+        <div id="textShadowOptions" style="display:none;">
+            <label for="textShadowX">Text Shadow X:</label>
+            <input type="range" id="textShadowX" min="-10" max="10" value="3" step="1" onchange="changeTextShadow()">
+            <br></br>
+            <label for="textShadowY">Text Shadow Y:</label>
+            <input type="range" id="textShadowY" min="-10" max="10" value="4" step="1" onchange="changeTextShadow()">
+            <br></br>
+            <label for="textShadowBlur">Text Shadow Blur:</label>
+            <input type="range" id="textShadowBlur" min="0" max="10" value="2" step="1" onchange="changeTextShadow()">
+            <br></br>
+            <label for="textShadowColor">Text Shadow Color:</label>
+            <input type="color" id="textShadowColor" onchange="changeTextShadow()">
+            <br></br> 
+        </div>
+        <br></br>
+        <label class="label-inline" for="fontSelect">Font:</label>
+        <select id="fontSelect" onchange="changePlateFont()">
+            <option value="'Charles Wright', sans-serif" style="font-family: 'Charles Wright', sans-serif;">STANDARD</option>
+            <option value="'Roboto', sans-serif" style="font-family: 'Roboto', sans-serif;">ROBOTO</option>
+            <option value="'Arial', sans-serif" style="font-family: 'Arial', sans-serif;">ARIAL</option>
+            <option value="'Pacifico', cursive" style="font-family: 'Pacifico', cursive;">PACIFICO</option>
+            <option value="'Courier New', monospace" style="font-family: 'Courier New', monospace;">COURIER NEW</option>
+            <option value="'Times New Roman', serif" style="font-family: 'Times New Roman', serif;">TIMES NEW ROMAN</option>
+            <option value="'Georgia', serif" style="font-family: 'Georgia', serif;">GEORGIA</option>
+            <option value="'Comic Sans MS', cursive" style="font-family: 'Comic Sans MS', cursive;">COMIC SANS MS</option>
+            <option value="'Tahoma', sans-serif" style="font-family: 'Tahoma', sans-serif;">TAHOMA</option>
+            <option value="'Trebuchet MS', sans-serif" style="font-family: 'Trebuchet MS', sans-serif;">TREBUCHET MS</option>
+            <option value="'Impact', sans-serif" style="font-family: 'Impact', sans-serif;">IMPACT</option>
+            <option value="'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">LUCIDA SANS</option>
+            <option value="'Lucida Console', Monaco, monospace" style="font-family: 'Lucida Console', Monaco, monospace;">LUCIDA CONSOLE</option>
+        </select> 
+        <br></br>           
+        <label class="label-inline" for="colorSelect">Plate Color:</label>
+        <input type="color" id="colorPicker" onchange="changePlateColor()">
+        <label class="label-inline"  for="textColorPicker">Text Color:</label>
+        <input type="color" id="textColorPicker" onchange="changeTextColor()">        
+        <label class="label-inline" for="sloganColorPicker">Slogan Color:</label>
+        <input type="color" id="sloganColorPicker" onchange="changeSloganColor()">
+        <br></br> 
+        <br></br> 
+        <div class="plate front">
+            <div class="plate-text-container" id="frontPlateTextContainer">
+            <div class="plate-text-container" id="frontPlate">
+                <div class="plate-text-wrapper">
+                    <div class="plate-text" id="frontPlate">AB12 CDE</div>
+                </div>
+            </div>
+        </div>           
+            <div class="fslogan" id="frontSlogan">Code Master</div>
+            <div class="electric-box" id="frontGreenBox"><div id="frontBoxIcon"></div></div>            <div class="fbackground" id="frontBackground"></div>
+            <div class="border" id="frontBorder"></div>
+            <div class="bottom-right" id="frontStamp">BSAU145d</div>
+        </div>
+        <div class="plate back">
+            <div class="plate-text-container" id="backPlateTextContainer">
+            <div class="plate-text-container" id="backPlate">
+                <div class="plate-text-wrapper">
+            <div class="plate-text" id="backPlate">AB12 CDE</div>
+                </div>
+            </div>
+        </div>
+            <div class="bslogan" id="backSlogan">Code Master</div>
+            <div class="electric-box" id="backGreenBox"><div id="backBoxIcon"></div></div>
+            <div class="bbackground" id="backBackground"></div>
+            <div class="border" id="backBorder"></div>
+            <div class="bottom-right" id="backStamp">BSAU145d</div>
+        </div>
+        <div class="button-container">
+            <button class="button1 button2col" onclick="savePlate('front')">Save Front Plate</button>
+            <button class="button1 button3col" onclick="saveBothPlates()">Save Both Plates</button>
+            <button class="button1 button1col" onclick="savePlate('back')">Save Rear Plate</button>
+        </div>
+            <button class="button button2" onclick="window.location.reload();">RESET</button>
+        <div class="footer">
+            <p>We understand that there may be bugs or other issues present in the Number Plate Creator. If you encounter any problems, please don't hesitate to contact us.</p>
+            -----------------------------------------------------
+            <footer>
+                <div class="foot">
+                <p>&copy; 2024 CodeMaster. All rights reserved.</p>
+                <div class="social-media">
+                    <a href="https://discord.com/invite/nguYr7xD?utm_source=Discord%20Widget&utm_medium=Connect" target="_blank"><i class="fab fa-discord" style="color: rgb(68, 171, 255);"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61559501661235" target="_blank"><i class="fab fa-facebook-f" style="color: rgb(0, 140, 255);"></i></a>
+                    <a href="https://www.instagram.com/_code.master/" target="_blank"><i class="fab fa-instagram" style="color: orangered;"></i></a>
+                    <a href="mailto:info@codemaster.ltd" target="_blank"><i class="fa fa-envelope" style="color: rgb(255, 234, 208);"></i></a>
+                    <a href="https://www.youtube.com/@CodeMaster2024" target="_blank"><i class="fab fa-youtube" style="color: red;"></i></a>
+                </div>
+                <a class="foot" id="version"></a> 
+            </footer>                
+        </div>
+    </div>
+    <script>
+const plateInput = document.getElementById("plateInput");
+const sloganInput = document.getElementById("sloganInput");
+const BSDInput = document.getElementById("BSDInput");
+const frontPlate = document.getElementById("frontPlate");
+const backPlate = document.getElementById("backPlate");
+const frontSlogan = document.getElementById("frontSlogan");
+const backSlogan = document.getElementById("backSlogan");
+const frontGreenBox = document.getElementById("frontGreenBox");
+const backGreenBox = document.getElementById("backGreenBox");
+const styleSelect = document.getElementById("styleSelect");
+const frontBorder = document.getElementById("frontBorder");
+const backBorder = document.getElementById("backBorder");
+const stampSelect = document.getElementById("stampSelect");
+const colorPicker = document.getElementById("colorPicker", "textColorPicker");
+const frontStamp = document.getElementById("frontStamp");
+const backStamp = document.getElementById("backStamp");
+const borderColorInput = document.getElementById("borderColor");
+
+plateInput.addEventListener("input", updatePlate, showElectricBox("block", 'none'));
+sloganInput.addEventListener("input", updateSlogan);
+BSDInput.addEventListener("input", updateBSD);
+colorPicker.addEventListener("change", function() {
+    changeTextColor();
+    changePlateColor();
+    changeTextShadow();
+});
+styleSelect.addEventListener("change", toggleBoxStyle);
+stampSelect.addEventListener("change", toggleStamp);
+
+showElectricBox("none", 'none')
+showBorder("none");
+showStamp("block");
+
+function updatePlate() {
+    const plateText = plateInput.value.trim().toUpperCase();
+    
+    // Update plate text
+    frontPlate.textContent = plateText || "AB12 CDE";
+    backPlate.textContent = plateText || "AB12 CDE";
+}
+
+
+
+
+function updateSlogan() {
+    const sloganText = sloganInput.value;
+    frontSlogan.textContent = sloganText || "Code Master";
+    backSlogan.textContent = sloganText || "Code Master";
+}
+
+function updateBSD() {
+    const BSDText = BSDInput.value;
+    frontStamp.textContent = BSDText || "BSAU145d";
+    backStamp.textContent = BSDText || "BSAU145d";
+}
+
+function changePlateFont() {
+    const selectedFont = document.getElementById("fontSelect").value;
+    const plateTexts = document.querySelectorAll('.plate');
+    plateTexts.forEach(text => {
+        text.style.fontFamily = selectedFont;
+        if (selectedFont == "'Charles Wright', sans-serif") {
+            text.style.padding = "20px";
+            text.style.fontSize = '195px';
+        }
+        else if (selectedFont !== "'Charles Wright', sans-serif") {
+            text.style.padding = "20px";
+            text.style.fontSize = '185px';
+        }
+    });
+}
+
+function toggleBoxStyle() {
+    const effect = document.getElementById('borderEffect').value;
+    const style = document.getElementById('styleSelect').value; 
+    const frontPlate = document.getElementById('frontPlate');
+    const backPlate = document.getElementById('backPlate');
+    const backBoxIcon = document.getElementById('backBoxIcon');
+    const frontBoxIcon = document.getElementById('frontBoxIcon');
+    const frontBorder = document.getElementById('frontBorder');
+    const backBorder = document.getElementById('backBorder');
+    switch (style) {
+        case "none":
+            showElectricBox("none", 'none');
+            frontPlate.style.transform = 'translateX(0px)';
+            backPlate.style.transform = 'translateX(0px)';
+            backBoxIcon.style.display = 'none';
+            frontBoxIcon.style.display = 'none';
+            frontBorder.style.left = '5px';
+            backBorder.style.left = '5px';
+            break;
+        case "electric":
+            showElectricBox("block", 'electric');
+            frontPlate.style.transform = 'translateX(40px)';
+            backPlate.style.transform = 'translateX(40px)';
+            backBoxIcon.style.display = 'none';
+            frontBoxIcon.style.display = 'none';
+            frontBorder.style.left = '105px';
+            backBorder.style.left = '105px';
+            break;
+        case "electricIcon":
+            showElectricBox("block", 'electricIcon');
+            backBoxIcon.innerHTML = '<i class="fa-solid fa-bolt-lightning icon1"></i>';
+            frontBoxIcon.innerHTML = '<i class="fa-solid fa-bolt-lightning icon"></i>';
+            frontPlate.style.transform = 'translateX(40px)';
+            backPlate.style.transform = 'translateX(40px)';
+            backBoxIcon.style.display = 'block';
+            frontBoxIcon.style.display = 'block';
+            frontBorder.style.left = '105px';
+            backBorder.style.left = '105px';
+            break;
+        case "electricIcon1":
+            showElectricBox("block", 'electricIcon1');
+            backBoxIcon.innerHTML = '<i class="fa-solid fa-plug-circle-bolt icon4"></i>';
+            frontBoxIcon.innerHTML = '<i class="fa-solid fa-plug-circle-bolt icon5"></i>';
+            frontPlate.style.transform = 'translateX(40px)';
+            backPlate.style.transform = 'translateX(40px)';
+            backBoxIcon.style.display = 'block';
+            frontBoxIcon.style.display = 'block';
+            frontBorder.style.left = '105px';
+            backBorder.style.left = '105px';
+            break;
+        case "electricText":
+            showElectricBox("block", 'electricText');
+            backBoxIcon.innerText = 'EV';
+            backBoxIcon.classList.add('icon2');
+            frontBoxIcon.innerText = 'EV';
+            frontBoxIcon.classList.add('icon3');
+            frontPlate.style.transform = 'translateX(40px)';
+            backPlate.style.transform = 'translateX(40px)';
+            backBoxIcon.style.display = 'block';
+            frontBoxIcon.style.display = 'block';
+            frontBorder.style.left = '105px';
+            backBorder.style.left = '105px';
+            break;
+        case "UK":
+            showElectricBox("block", 'UK');
+            backBoxIcon.innerText = 'UK';
+            backBoxIcon.classList.add('icon2');
+            frontBoxIcon.innerText = 'UK';
+            frontBoxIcon.classList.add('icon3');
+            frontPlate.style.transform = 'translateX(40px)';
+            backPlate.style.transform = 'translateX(40px)';
+            backBoxIcon.style.display = 'block';
+            frontBoxIcon.style.display = 'block';
+            frontBorder.style.left = '105px';
+            backBorder.style.left = '105px';
+            break;
+        default:
+            console.error("Invalid style");
+    }
+}
+
+
+function toggleBorderEffect() {
+    const effect = document.getElementById("borderEffect").value;
+    const borderOptions = document.getElementById("borderOptions");
+    if (effect === "yes") {
+        showBorder("block");
+        borderOptions.style.display = "block";
+    }
+    else {
+        showBorder("none");
+        borderOptions.style.display = "none";
+    }
+}
+
+function toggle4DEffect() {
+    const fourDEffect = document.getElementById("fourDEffect").value;
+    const textShadowOptions = document.getElementById("textShadowOptions");
+    const frontGreenBox = document.getElementById('frontGreenBox');
+    const backGreenBox = document.getElementById('backGreenBox');
+    const backBoxIcon = document.getElementById('backBoxIcon');
+    const frontBoxIcon = document.getElementById('frontBoxIcon');
+
+    if (fourDEffect === 'yes') {
+        textShadowOptions.style.display = 'block';
+        frontGreenBox.style.boxShadow = '0 0 10px #000';
+        backGreenBox.style.boxShadow = '0 0 10px #000';
+        backBoxIcon.style.textShadow = '0 0 5px #000';
+        frontBoxIcon.style.textShadow = '0 0 5px #000';
+    } else {
+        textShadowOptions.style.display = 'none';
+        frontGreenBox.style.boxShadow = '0 0 0 #000';
+        backGreenBox.style.boxShadow = '0 0 0 #000';
+        backBoxIcon.style.textShadow = '0 0 0 #000';
+        frontBoxIcon.style.textShadow = '0 0 0 #000';
+        resetTextShadow();
+    }
+}
+
+function toggleStamp() {
+    const stamp = stampSelect.value;
+    switch (stamp) {
+        case "yes":
+            showStamp("block");
+            break;
+        case "no":
+            showStamp("none");
+            break;
+        default:
+            console.error("Invalid style");
+    }
+}
+
+function toggleSlogan() {
+    const slogan = sloganSelect.value;
+    switch (slogan) {
+        case "yes":
+            showSlogan("block");
+            break;
+        case "no":
+            showSlogan("none");
+            break;
+        default:
+            console.error("Invalid style");
+    }
+}
+
+
+function showElectricBox(displayStyle, type) {
+    document.getElementById('frontGreenBox').style.display = displayStyle;
+    document.getElementById('backGreenBox').style.display = displayStyle;
+
+    const plateTextWrappers = document.querySelectorAll('.plate-text-wrapper');
+    plateTextWrappers.forEach(wrapper => {
+        if (displayStyle === 'block' && type === 'electric') {
+            frontGreenBox.style.backgroundColor = '#00cc00';
+            backGreenBox.style.backgroundColor = '#00cc00';
+        } else if (displayStyle === 'block' && type === 'electricIcon') {
+            frontGreenBox.style.backgroundColor = '#00cc00';
+            backGreenBox.style.backgroundColor = '#00cc00';
+        } else if (displayStyle === 'block' && type === 'electricIcon1') {
+            frontGreenBox.style.backgroundColor = '#00cc00';
+            backGreenBox.style.backgroundColor = '#00cc00';
+        } else if (displayStyle === 'block' && type === 'electricIcon') {
+            frontGreenBox.style.backgroundColor = '#00cc00';
+            backGreenBox.style.backgroundColor = '#00cc00';
+        } else if (displayStyle === 'block' && type === 'UK') {
+            frontGreenBox.style.backgroundColor = '#104188';
+            backGreenBox.style.backgroundColor = '#104188';
+        } else if (displayStyle === 'none' && type === 'none') {
+            wrapper.style.transform = 'none';
+        } else {
+            wrapper.style.transform = 'none';
+        }
+    });
+}
+
+function showBorder(display) {
+    frontBorder.style.display = display;
+    backBorder.style.display = display;
+}
+
+function showStamp(display) {
+    frontStamp.style.display = display;
+    backStamp.style.display = display;
+}
+
+function showSlogan(display) {
+    frontSlogan.style.display = display;
+    backSlogan.style.display = display;
+}
+
+function changePlateColor() {
+    const colorPicker = document.getElementById('colorPicker'); // Ensure colorPicker is defined
+    const plateColor = colorPicker.value;
+    const plates = document.querySelectorAll('.plate');
+    const backBoxIcon = document.getElementById('backBoxIcon');
+    const frontBoxIcon = document.getElementById('frontBoxIcon');
+    const frontSlogan = document.getElementById("frontSlogan");
+    const backSlogan = document.getElementById("backSlogan");
+
+    // Change the color of the backBoxIcon
+    backBoxIcon.style.color = plateColor;
+    frontBoxIcon.style.color = plateColor;
+
+    // Change the background color of the plates
+    plates.forEach(plate => {
+        plate.style.background = `linear-gradient(180deg, ${plateColor}, ${plateColor})`;
+    });
+
+    // Change the background color of the slogans
+    frontSlogan.style.backgroundColor = plateColor;
+    backSlogan.style.backgroundColor = plateColor;
+}
+
+
+function changeBorderColor() {
+    const borderColor = document.getElementById("borderColor").value;
+    const borderElements = document.querySelectorAll('.border');
+    borderElements.forEach(element => {
+        element.style.borderColor = borderColor;
+    });
+}
+
+function changeTextColor() {
+    const textColor = document.getElementById("textColorPicker").value;
+    const textElements = document.querySelectorAll('.plate-text');
+    textElements.forEach(element => {
+        element.style.color = textColor;
+    });
+}
+
+function changeSloganColor() {
+    const sloganColor = document.getElementById("sloganColorPicker").value;
+    const sloganElements = document.querySelectorAll('.slogan');
+    sloganElements.forEach(element => {
+        element.style.color = sloganColor;
+    });
+}
+
+function changeTextShadow() {
+    const textShadowX = document.getElementById("textShadowX").value;
+    const textShadowY = document.getElementById("textShadowY").value;
+    const textShadowBlur = document.getElementById("textShadowBlur").value;
+    const textShadowColor = document.getElementById("textShadowColor").value;
+
+    const textElements = document.querySelectorAll('.plate-text');
+    textElements.forEach(element => {
+        element.style.textShadow = `${textShadowX}px ${textShadowY}px ${textShadowBlur}px ${textShadowColor}`;
+    });
+}
+
+function resetTextShadow() {
+    const textElements = document.querySelectorAll('.plate-text');
+    textElements.forEach(element => {
+        element.style.textShadow = '2px 2px 2px rgba(0, 0, 0, 0.1)';
+    });
+}
+
+function changePlateStyle() {
+    const plateStyle = document.getElementById("plateStyleSelect").value;
+
+    switch (plateStyle) {
+        case "standard":
+            applyStandardPlateStyle();
+            break;
+        case "old":
+            applyOldPlateStyle();
+            break;
+        default:
+            console.error("Invalid plate style");
+    }
+}
+
+function TintPlate() {
+    const plateStyle = document.getElementById("plateTintSelect").value;
+    switch (plateStyle) {
+        case "standard":
+            applyStandardPlateStyle();
+            break;
+        case "tinted":
+            TintedPlate();
+            break;
+        default:
+            console.error("Invalid plate style");
+    }
+}
+
+
+function applyStandardPlateStyle() {
+    /*frontPlate.style.background = 'linear-gradient(180deg, #ffffff, #c7c7c7)';*/
+    /*backPlate.style.background = 'linear-gradient(180deg, #FFA500, #ca8401)';*/
+    frontPlate.style.backgroundColor = '#FFFFFF';
+    backPlate.style.backgroundColor = '#FFA500';
+    frontPlate.style.borderRadius = "10px";
+    backPlate.style.borderRadius = "10px";
+    frontPlate.style.lineHeight = "235px";
+    backPlate.style.lineHeight = "235px";
+    
+    const plateTexts = document.querySelectorAll('.plate-text');
+    plateTexts.forEach(text => {
+        text.style.color = '#000';
+    });
+
+    showSlogan("block");
+    showStamp("block");
+    resetTextShadow();
+}
+
+function applyOldPlateStyle() {
+    frontPlate.style.backgroundColor = '#000';
+    backPlate.style.backgroundColor = '#000';
+    frontPlate.style.borderRadius = "10px";
+    backPlate.style.borderRadius = "10px";
+    frontPlate.style.textShadow = '2px 2px 2px rgba(105,105,105, 1.0)';
+    backPlate.style.textShadow = '2px 2px 2px rgba(105,105,105, 1.0)';
+    frontPlate.style.lineHeight = "235px";
+    backPlate.style.lineHeight = "235px";
+
+    const plateTexts = document.querySelectorAll('.plate-text');
+    plateTexts.forEach(text => {
+        text.style.color = 'silver';
+    });
+    
+
+    showSlogan("none");
+    showStamp("none");
+    showElectricBox("none", 'none')
+}
+
+function TintedPlate() {
+    frontPlate.style.backgroundColor = 'rgba(0,0,0, 0.5)';
+    backPlate.style.backgroundColor = 'rgba(0,0,0, 0.5)';
+    frontPlate.style.borderRadius = "10px";
+    backPlate.style.borderRadius = "10px";
+    frontPlate.style.lineHeight = "235px";
+    backPlate.style.lineHeight = "235px";
+    frontPlate.style.zIndex = "2";
+    backPlate.style.zIndex = "2";
+    const plateT = document.getElementById("plateTintSelect").value;
+    plateT.style.transform = 'translateX(-40px)';
+
+}
+
+
+function saveBothPlates() {
+    savePlate('front');
+    savePlate('back');
+}
+
+
+function savePlate(type) {
+    let plateContainer;
+    let plateNo = 0;
+    if (type === 'front') {
+        plateContainer = document.querySelector(".front");
+    } else if (type === 'back') {
+        plateContainer = document.querySelector(".back");
+    } else {
+        console.error('Invalid plate type');
+        return;
+    }
+
+    const scale = 2.5;
+    const images = plateContainer.querySelectorAll('img');
+
+    html2canvas(plateContainer, { scale: scale }).then(canvas => {
+        const imageURL = canvas.toDataURL(`image/png`, 10.0);
+        const link = document.createElement('a');
+        link.href = imageURL;
+        link.download = `SHM-${type}_plate${plateNo+1}.png`;
+        link.click();
+
+        plateContainer.style.boxShadow = "0 0 15px rgba(0, 255, 0, 1.0)";
+        setTimeout(() => {
+            plateContainer.style.boxShadow = "none";
+        }, updateloadTime); 
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
+    document.body.scrollTop = 0;
+};
+
+var loadingProgress = document.getElementById('loading-progress2');     
+var duration = loadTime;
+var start = 0;
+var end = 100;
+var range = end - start;
+var current = start;
+var increment = end > start ? 1 : -1;
+var stepTime = Math.abs(Math.floor(duration / range));
+var stepTime2 = 10 * Math.abs(Math.floor(duration / range));
+
+function animateLoading() {
+    var timer = setInterval(function() {
+        if (current > 60 && current < 70) {
+            setTimeout(function() {
+                current += increment;
+                loadingProgress.textContent = current;
+            }, stepTime2);
+        } else {
+            current += increment;
+            loadingProgress.textContent = current;
+        }
+
+        if (current == end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
+animateLoading();
+
+const version = document.getElementById('version');
+if (version) {
+    version.textContent = `V${versionNumber}`;
+}
+});
+
+    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+</body>
+</html>
