@@ -1,0 +1,566 @@
+@import url('https://fonts.cdnfonts.com/css/charles-wright');
+.logo {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+    border-radius: 20px;
+    box-shadow: #3a3a3a 0 0 5px;
+    animation-delay: 1s;
+    width: 100px; 
+    height: auto; 
+    z-index: 999; 
+}
+
+h2 {
+    margin-top: -5px;
+    background: #808080;
+    text-align: center;
+    font-size: 45px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    opacity: 0;
+    animation: fadeIn 4s forwards;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: transform 0.3s ease-in-out; 
+}
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+    max-width: 970px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #8b8b8bbd;
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+}
+
+@keyframes boxShadowAnimation {
+    50% {
+        box-shadow: #9abaff 0 0 15px;
+    }
+    100% {
+        box-shadow: #9abaff 0 0 30px;
+    }
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 20px;
+    box-shadow: #9abaff 0px 0px 30px;
+    animation: boxShadowAnimation 2s infinite;
+    pointer-events: none;
+}
+
+.plate {
+    font-family: 'Charles Wright', sans-serif;
+    position: relative;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    color: #000;
+    font-size: 195px;
+    line-height: 235px;
+}
+.front {
+    /*background: linear-gradient(180deg, #ffffff, #c7c7c7);*/
+    background-color: #FFFFFF;
+}
+
+.back  {
+   /* background: linear-gradient(180deg, #FFA500, #ca8401);*/
+    background-color: #FFA500;
+}
+input[type="text"] {
+    width: 290px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #adadad;
+    border-radius: 10px;
+    text-align: center;
+}
+.button-container {
+    text-align: center;
+    margin-top: -15px;
+}
+.button {
+    border: 2px solid #000;
+    color: rgb(255, 255, 255);
+    padding: 10px 15px;
+    display: block; 
+    font-size: 16px;
+    margin: 5px auto; 
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+.button1col:hover {
+    box-shadow: #FFA500 0px 0px 10px;
+}
+.button2col:hover {
+    box-shadow: #FFFFFF 0px 0px 10px;
+}
+.button3col:hover {
+    box-shadow: #000000 0px 0px 10px;
+}
+.button2:hover {
+    color: #a1a1a1;
+}
+.button1 {
+    border: 2px solid #000;
+    color: #000;
+    padding: 0px 10px;
+    display: inline-block; 
+    font-size: 16px;
+    margin: 1px; 
+    cursor: pointer;
+    border-radius: 50px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.button2 {
+    border: 0px solid #e2e2e2ea;
+    background-color: #00000000;
+    font-weight: bold;
+    color: #7a0000;
+    padding: 10px 15px;
+    display: block; 
+    font-size: 12px;
+    margin: 5px auto; 
+    cursor: pointer;
+    border-radius: 50px;
+    animation: pulse 2s infinite;
+}
+.button1col {
+    background: linear-gradient(180deg, #FFA500, #ca8401);
+}
+.button2col {
+    background: linear-gradient(180deg, #ffffff, #c7c7c7);
+}
+.button3col {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+.fslogan {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute; 
+    bottom: 8px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    font-size: 15px; 
+    color: #000;
+    font-weight: bold;
+    line-height: 100%;
+    padding-right:20px;
+    padding-left: 20px;
+    background: #FFFFFF;
+    z-index: 1;
+}
+.bslogan {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute; 
+    bottom: 8px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    font-size: 15px; 
+    color: #000;
+    font-weight: bold;
+    line-height: 100%;
+    padding-right:20px;
+    padding-left: 20px;
+    background: #FFA500;
+    z-index: 1;       
+}
+.bottom-right {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    font-weight: bold;
+    bottom: 17px;
+    right: 25px; 
+    font-size: 10px; 
+    color: #000;
+    line-height: 100%;
+}
+.centered {
+    text-align: center;
+}
+.footer {
+    margin-top: -18px;
+    text-align: center; 
+    font-size: 13px;
+    color: #000000;
+}
+.copyright2 {
+    margin-top: 100px;
+    text-align: center; 
+    font-size: 13px;
+    color: #313131;
+    text-shadow: #0051ff 0px 0px 1.5px;
+}
+.footer p {
+    text-align: center; 
+    font-size: 13px;
+    color: #000000;
+}
+.discord-link {
+    margin-top: -18px;
+    display: absolute;
+    align-items: center;
+    justify-content: center;
+}
+
+.discord-link img {
+    margin-top: -10px;
+    width: 40px; 
+    height: 35px;
+    margin-left: 5px; 
+    box-shadow: #0051ff 0px 0px 5px;
+    border-radius: 50px;
+    animation: pulse 3s infinite backwards;
+}
+.version {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 5px; 
+    right: 10px; 
+    font-size: 10.5px; 
+    color: #000;
+    font-weight: 500;
+}
+.changelog {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 25px;
+    right: 10px; 
+    font-size: 10.5px; 
+    font-weight: 500;
+}
+/*
+.electric-box {
+    display: none; 
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 85px;
+    height: auto;
+    left: 12px;
+    right: 12px;
+    border-radius: 10px;
+    translate: 0;
+    box-shadow: 1px 0 3px #006611;
+
+}
+*/
+.electric-box {
+    display: none; 
+}
+.border {
+    display: none;
+    position: absolute;
+    top: 10px;
+    bottom: 13px;
+    left: 5px;
+    right: 5px;
+    border-width: 5px;
+    border-style: solid; 
+    border-color: #000; 
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+label {
+    color: #000;
+    font-size: smaller;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+.label-inline {
+    display: inline-block;
+    width: auto; 
+    margin-right: 1px;
+    text-align: center;
+}
+#plateInput {
+    text-transform: uppercase;
+    font-family: 'Charles Wright', sans-serif;
+}
+footer .social-media a p {
+    color: #ffffffa2;
+    margin: 0 5px;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+footer .social-media a:hover {
+    color: #21a2f8;
+    text-shadow: 0 0 5px #be57fa;
+}
+.foot {
+    text-align: center;
+    font-size: 18px;
+    margin: 5px 0px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0.25;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; 
+    }
+    to {
+        opacity: 1; 
+    }
+}
+
+@keyframes colorIn {
+    80%, 100% {
+        color: #00f800;
+    }
+    40%, 50%, 80% {
+        color: #ff6600;
+    }
+    0%, 40% {
+        color: #ff0000; 
+    }
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.icon {
+    font-size: 80px;
+    color: #FFFFFF;
+    position: absolute;
+    top: 70px; 
+    transform: translateX(-50%);
+    text-shadow: 0 0 2px #8a8989; 
+    vertical-align: middle;
+}
+.icon1 {
+    text-align: center; 
+    font-size: 80px;
+    color: #FFA500;
+    position: absolute;
+    top: 70px; 
+    transform: translateX(-50%); 
+    text-shadow: 0 0 2px #704900;
+    vertical-align: middle;
+}
+
+.icon2 {
+    text-align: center; 
+    font-size: 60px;
+    color: #FFA500;
+    position: absolute;
+    left: 60px;
+    top: -10px;
+    transform: translateX(-70%); 
+    text-shadow: 0 0 2px #704900;
+    vertical-align: middle;
+}
+
+.icon3 {
+    text-align: center; 
+    font-size: 60px;
+    color: #FFFFFF;
+    position: absolute;
+    left: 60px;
+    top: -10px;
+    transform: translateX(-70%); 
+    text-shadow: 0 0 2px #8a8989;
+    vertical-align: middle;
+}
+
+.icon5 {
+    text-align: center;
+    font-size: 60px;
+    color: #FFFFFF;
+    position: absolute;
+    top: 70px; 
+    transform: translateX(-50%);
+    text-shadow: 0 0 2px #8a8989; 
+    vertical-align: middle;
+}
+.icon4 {
+    text-align: center; 
+    font-size: 60px;
+    color: #FFA500;
+    position: absolute;
+    top: 70px; 
+    transform: translateX(-50%); 
+    text-shadow: 0 0 2px #704900;
+    vertical-align: middle;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    justify-content: center;
+    background-color: #000;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        top: 5px; 
+        left: 5px; 
+        width: 70px; 
+    }
+
+    h2 {
+        font-size: 30px;
+        padding: 5px;
+    }
+
+    .container {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    .plate {
+        font-size: 120px;
+        line-height: 150px;
+    }
+
+    input[type="text"] {
+        width: 80%;
+    }
+
+    .button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .fslogan, .bslogan {
+        font-size: 12px; 
+        padding: 5px 10px;
+        margin-bottom: -8px;
+    }
+
+    .bottom-right {
+        margin-bottom: -7px;
+        font-size: 7px;
+    }
+
+    .icon, .icon1, .icon2, .icon3, .icon4, .icon5 {
+        font-size: 50px;
+        top: 50px;
+    }
+
+    .version, .changelog {
+        font-size: 8px; 
+    }
+
+    .footer p, .copyright2, .foot {
+        font-size: 11px;
+    }
+
+    .discord-link img {
+        width: 30px;
+        height: 30px;
+    }
+    .electric-box {
+        display: none;  
+    }
+    .border {
+        bottom: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 50px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .plate {
+        font-size: 90px;
+        line-height: 110px;
+    }
+
+    input[type="text"] {
+        width: 90%;
+    }
+
+    .fslogan, .bslogan {
+        font-size: 6px; 
+        margin-bottom: -7px;
+        padding: 2px 5px;
+    }
+
+    .bottom-right {
+        margin-bottom: -10px;
+        font-size: 3px;
+        margin-right: -8px;
+    }
+
+    .icon, .icon1, .icon2, .icon3, .icon4, .icon5 {
+        font-size: 40px;
+        top: 40px;
+    }
+    .electric-box {
+        display: none;  
+    }
+
+    .border {
+        bottom: 10px;
+    }
+}
