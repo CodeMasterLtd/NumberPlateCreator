@@ -523,10 +523,6 @@ footer .social-media a:hover {
 }
 
 @media (max-width: 480px) {
-    .logo {
-        width: 50px;
-    }
-
     h2 {
         font-size: 30px;
     }
@@ -538,6 +534,45 @@ footer .social-media a:hover {
 
     input[type="text"] {
         width: 90%;
+    }
+
+    .fslogan, .bslogan {
+        font-size: 6px; 
+        margin-bottom: -7px;
+        padding: 2px 5px;
+    }
+
+    .bottom-right {
+        margin-bottom: -10px;
+        font-size: 3px;
+        margin-right: -8px;
+    }
+
+    .icon, .icon1, .icon2, .icon3, .icon4, .icon5 {
+        font-size: 40px;
+        top: 40px;
+    }
+    .electric-box {
+        display: none;  
+    }
+
+    .border {
+        bottom: 10px;
+    }
+}
+
+@media (max-width: 450px) {
+    h2 {
+        font-size: 25px;
+    }
+
+    .plate {
+        font-size: 80px;
+        line-height: 110px;
+    }
+
+    input[type="text"] {
+        width: 80%;
     }
 
     .fslogan, .bslogan {
