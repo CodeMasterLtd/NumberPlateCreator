@@ -95,6 +95,8 @@ input[type="text"] {
     border: 1px solid #adadad;
     border-radius: 10px;
     text-align: center;
+    margin: 5px;
+    font-size: 16px;
 }
 .button-container {
     text-align: center;
@@ -479,6 +481,7 @@ footer .social-media a:hover {
 
     input[type="text"] {
         width: 80%;
+        margin: 5px;
     }
 
     .button {
@@ -534,6 +537,7 @@ footer .social-media a:hover {
 
     input[type="text"] {
         width: 90%;
+        margin: 5px;
     }
 
     .fslogan, .bslogan {
@@ -567,12 +571,13 @@ footer .social-media a:hover {
     }
 
     .plate {
-        font-size: 80px;
+        font-size: 75px;
         line-height: 110px;
     }
 
     input[type="text"] {
-        width: 80%;
+        width: 90%;
+        margin: 5px;
     }
 
     .fslogan, .bslogan {
@@ -582,7 +587,7 @@ footer .social-media a:hover {
     }
 
     .bottom-right {
-        margin-bottom: -10px;
+        margin-bottom: -9px;
         font-size: 3px;
         margin-right: -8px;
     }

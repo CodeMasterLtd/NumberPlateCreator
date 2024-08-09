@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Number Plate Creator</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/charles-wright" rel="stylesheet">
@@ -14,8 +11,16 @@
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="shortcut icon" href="img/npc.png" type="image/png"><!-- nice try -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+    <link rel="canonical" href="https://www.beta.codemaster.ltd/">
+    <link rel="icon" href="img/npc.png"><!-- 32×32 -->
+    <link rel="icon" href="img/npc.png" type="image/png">
+    <link rel="apple-touch-icon" href="img/npc.png"><!-- 180×180 -->
+    <link rel="apple-touch-icon-precomposed" href="img/npc.png">
+    <link rel="shortcut icon" href="img/npc.png" type="image/png">
+    <meta property="og:title" content="Number Plate Creator by Code Master">
 </head>
 <body>
     <div class="video-overlay">
@@ -120,7 +125,7 @@
             <div class="plate-text-container" id="frontPlateTextContainer">
             <div class="plate-text-container" id="frontPlate">
                 <div class="plate-text-wrapper">
-                    <div class="plate-text" id="frontPlate">AB12 CDE</div>
+                    <div class="plate-text" id="frontPlate"></div>
                 </div>
             </div>
         </div>           
@@ -133,7 +138,7 @@
             <div class="plate-text-container" id="backPlateTextContainer">
             <div class="plate-text-container" id="backPlate">
                 <div class="plate-text-wrapper">
-            <div class="plate-text" id="backPlate">AB12 CDE</div>
+            <div class="plate-text" id="backPlate"></div>
                 </div>
             </div>
         </div>

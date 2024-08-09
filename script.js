@@ -1,8 +1,4 @@
 const versionNumber = '2.0.0.0';
-const loadTime = 4000;
-const updateloadTime = 10000;
-const ping = 1000;
-const imgType = 'png';
 
 const plateInput = document.getElementById("plateInput");
 const sloganInput = document.getElementById("sloganInput");
@@ -22,7 +18,7 @@ const frontStamp = document.getElementById("frontStamp");
 const backStamp = document.getElementById("backStamp");
 const borderColorInput = document.getElementById("borderColor");
 
-plateInput.addEventListener("input", updatePlate, showElectricBox("block", 'none'));
+plateInput.addEventListener("input", updatePlate);
 sloganInput.addEventListener("input", updateSlogan);
 BSDInput.addEventListener("input", updateBSD);
 colorPicker.addEventListener("change", function() {
@@ -41,11 +37,13 @@ function updatePlate() {
     const plateText = plateInput.value.trim().toUpperCase();
     
     // Update plate text
-    frontPlate.textContent = plateText || "AB12 CDE";
-    backPlate.textContent = plateText || "AB12 CDE";
+    const defaultText = "AB12 CDE";
+    frontPlate.textContent = plateText || defaultText;
+    backPlate.textContent = plateText || defaultText;
 }
 
 
+window.onload = updatePlate();
 
 
 function updateSlogan() {
@@ -386,7 +384,7 @@ function changePlateStyle() {
             console.error("Invalid plate style");
     }
 }
-
+/*
 function TintPlate() {
     const plateStyle = document.getElementById("plateTintSelect").value;
     switch (plateStyle) {
@@ -400,7 +398,7 @@ function TintPlate() {
             console.error("Invalid plate style");
     }
 }
-
+*/
 
 function applyStandardPlateStyle() {
     /*frontPlate.style.background = 'linear-gradient(180deg, #ffffff, #c7c7c7)';*/
@@ -443,21 +441,6 @@ function applyOldPlateStyle() {
     showElectricBox("none", 'none')
 }
 
-function TintedPlate() {
-    frontPlate.style.backgroundColor = 'rgba(0,0,0, 0.5)';
-    backPlate.style.backgroundColor = 'rgba(0,0,0, 0.5)';
-    frontPlate.style.borderRadius = "10px";
-    backPlate.style.borderRadius = "10px";
-    frontPlate.style.lineHeight = "235px";
-    backPlate.style.lineHeight = "235px";
-    frontPlate.style.zIndex = "2";
-    backPlate.style.zIndex = "2";
-    const plateT = document.getElementById("plateTintSelect").value;
-    plateT.style.transform = 'translateX(-40px)';
-
-}
-
-
 function saveBothPlates() {
     savePlate('front');
     savePlate('back');
@@ -489,17 +472,19 @@ function savePlate(type) {
         plateContainer.style.boxShadow = "0 0 15px rgba(0, 255, 0, 1.0)";
         setTimeout(() => {
             plateContainer.style.boxShadow = "none";
-        }, updateloadTime); 
+        }, 10000); 
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-window.onload = function() {
-    document.body.scrollTop = 0;
-};
 
-const version = document.getElementById('version');
-if (version) {
-    version.textContent = `V${versionNumber}`;
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const body = document.body;
+    window.onload = function() {
+        body.scrollTop = 0;
+    };
+
+    const version = document.getElementById('version');
+    if (version) {
+        version.textContent = `V${versionNumber}`;
+    }
 });
