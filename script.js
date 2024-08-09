@@ -463,7 +463,7 @@ function savePlate(type) {
     const images = plateContainer.querySelectorAll('img');
 
     html2canvas(plateContainer, { scale: scale }).then(canvas => {
-        const imageURL = canvas.toDataURL(`image/png`, 10.0);
+        const imageURL = canvas.toDataURL('image/png, 10.0');
         const link = document.createElement('a');
         link.href = imageURL;
         link.download = `SHM-${type}_plate${plateNo+1}.png`;
